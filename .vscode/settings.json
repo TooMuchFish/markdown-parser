@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/shanshaodong/Downloads/cse12-sp22-pa4-Iterator-starter-master/libs/hamcrest-core-1.3.jar",
+        "/Users/shanshaodong/Downloads/cse12-sp22-pa4-Iterator-starter-master/libs/junit-4.12.jar"
+    ]
+}
