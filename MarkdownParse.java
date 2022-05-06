@@ -6,27 +6,37 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class MarkdownParse {
-
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
-        while(currentIndex < markdown.length()) {
-            int exclaim = markdown.indexOf("!", currentIndex);
-            int openBracket = markdown.indexOf("[", currentIndex);
-            if (!(exclaim == -1) && ((exclaim + 1) == openBracket)) {
-                currentIndex = openBracket + 1;
-                continue;
+        if(markdown.indexOf("(")!=-1 && markdown.indexOf("[")!=-1){
+            while(currentIndex < markdown.length()) {
+
+                if(markdown.indexOf("!")==0){
+                    break;
+                }
+
+                int nextOpenBracket = markdown.indexOf("[", currentIndex);
+                int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
+                int openParen = markdown.indexOf("(", nextCloseBracket);
+                int closeParen = markdown.indexOf(")", openParen);
+
+                if(nextOpenBracket==-1||nextCloseBracket==-1){
+                    break;
+                }
+
+                if(openParen==-1||closeParen==-1){
+                    break;
+                }
+
+                if(openParen-nextCloseBracket==1){
+                    toReturn.add(markdown.substring(openParen + 1, closeParen));
+                }
+
+                currentIndex = closeParen + 1;
             }
-            if (openBracket == -1) break;
-            int closeBracket = markdown.indexOf("]", openBracket);
-            if (closeBracket == -1) break;
-            int openParen = markdown.indexOf("(", closeBracket);
-            if (openParen == -1) break;
-            int closeParen = markdown.indexOf(")", openParen);
-            if (closeParen == -1) break;
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
+
         }
 
         return toReturn;
