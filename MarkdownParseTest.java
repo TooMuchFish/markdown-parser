@@ -15,4 +15,20 @@ public class MarkdownParseTest {
         assertEquals(2, 1 + 1);
     }
 
+    @Test
+    public void getLink()throws IOException{
+        Path testFile = Path.of("test1.md");
+        String result = Files.readString(testFile);
+        ArrayList<String> links = MarkdownParse.getLinks(result);
+        List<String> output = List.of("https://something.com", "some-page.html");
+        assertEquals(output,links);
+    }
+
+    
+    public static void main(String[] args) throws IOException {
+        Path fileName = Path.of(args[0]);
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+        System.out.println(links); 
+    }
 }
