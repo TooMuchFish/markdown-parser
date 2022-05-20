@@ -54,7 +54,7 @@ public class MarkdownParseTest {
         ArrayList<String> links = MarkdownParse.getLinks(contents);
         // Expected output
         ArrayList<String> expectedoutput = new ArrayList<>();
-        expectedoutput.add("https://ucsd-cse15l-w22.github.io/");
+        expectedoutput.add("https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule");
         assertEquals(expectedoutput, links);
     }
     
